@@ -1,20 +1,17 @@
-# StarkZap V2 - One-Tap Yield
-One-click DeFi: Swap STRK -> USDC and supply to Vesu for yield.
+# StarkZap - One Tap Yield
+
+One-tap yield on Starknet using Vesu + Avnu.
 
 ## Features
-- Swap via AVNU SDK
-- Lending via Vesu
-- Gasless via Paymaster
-- Invisible Wallet ready
+- ⚡ One click: Swap + Deposit
+- 🔄 Avnu for best swap routes
+- 💰 Vesu for lending yield
+- Built for Starknet
 
-## Tech Stack
-- starknet.js
-- @avnu/avnu-sdk
-- Starknet Sepolia
+## Stack
+- Starknet.js
+- Vesu Finance SDK
+- Avnu API
 
-## Flow
-1. User connects wallet
-2. One tap: Swap + Supply
-3. Earn yield automatically
-
-Built on Termux for StarkZap V2 Hackathon.
+## Repo
+https://github.com/jamal2000russia-del/starkzap-one-tap-yield
