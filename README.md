@@ -1,5 +1,7 @@
 # StarkZap - One Tap Yield on Starknet
 
+**Live Demo:** https://starkzap-one-tap-yield.vercel.app
+
 One-tap yield on Starknet using Vesu + Avnu. User deposits in 1 click, StarkZap finds the best route and deposits into Vesu for lending yield.
 
 ## Problem
