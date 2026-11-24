@@ -1,1 +1,65 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><title>StarkZap</title><style>body{background:#0a0a0a;color:white;display:flex;justify-content:center;padding:20px;font-family:sans-serif}.card{background:#171717;border:1px solid #333;border-radius:20px;padding:24px;width:380px}.btn{width:100%;background:#a855f7;color:white;border:0;border-radius:12px;padding:16px;font-weight:bold}</style></head><body><div class=card><h1>StarkZap</h1><p>Zap 10 USDC -> Vesu Yield. Fee 0.1% to you.</p><input id=a value=10 type=number style="width:100%;padding:12px;border-radius:10px"><button class=btn onclick="alert('Zapped! Fee: '+(a.value*0.001)+' USDC')">ZAP TO YIELD</button><p>Ready</p></div></body></html>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>StarkZap</title>
+<style>
+body{background:#0a0a0a;color:white;display:flex;justify-content:center;padding:20px;font-family:sans-serif}
+.card{background:#171717;border:1px solid #333;border-radius:20px;padding:24px;width:380px}
+.btn{width:100%;background:#a855f7;color:white;border:0;border-radius:12px;padding:16px;font-weight:bold;cursor:pointer}
+.btn-connect{background:#22c55e;margin-bottom:12px}
+.btn:disabled{background:#555;cursor:not-allowed}
+input{width:100%;padding:12px;border-radius:10px;box-sizing:border-box}
+</style>
+</head>
+<body>
+<div class="card">
+<h1>StarkZap</h1>
+<p>Zap 10 USDC -> Vesu Yield. Fee 0.1% to you.</p>
+
+<!-- NEW: CONNECT BUTTON -->
+<button id="connectBtn" class="btn btn-connect" onclick="connectWallet()">CONNECT WALLET</button>
+<p id="walletStatus">Not connected</p>
+
+<input id="a" value="10" type="number">
+<br><br>
+<button id="zapBtn" class="btn" onclick="doZap()" disabled>ZAP TO YIELD</button>
+<p id="result">Ready</p>
+</div>
+
+<script>
+let userAddress = null;
+
+async function connectWallet() {
+  try {
+    // Try ArgentX / Braavos injected wallet
+    const starknet = window.starknet;
+    if (!starknet) {
+      alert("Please install ArgentX or Braavos wallet first!");
+      window.open("https://www.argent.xyz/argent-x/", "_blank");
+      return;
+    }
+    await starknet.enable();
+    userAddress = starknet.selectedAddress || starknet.account?.address;
+    document.getElementById("walletStatus").innerText = "Connected: " + userAddress.slice(0,6) + "..." + userAddress.slice(-4);
+    document.getElementById("connectBtn").innerText = "CONNECTED ✓";
+    document.getElementById("zapBtn").disabled = false;
+    document.getElementById("result").innerText = "Wallet connected! You can now Zap.";
+  } catch (e) {
+    alert("Connect failed: " + e.message);
+  }
+}
+
+function doZap() {
+  if (!userAddress) {
+    alert("Please CONNECT WALLET first!");
+    return;
+  }
+  const amount = document.getElementById("a").value;
+  const fee = amount * 0.001; // 0.1%
+  document.getElementById("result").innerText = "Zapped! Fee: " + fee + " USDC | Wallet: " + userAddress.slice(0,6) + "...";
+  alert("Zapped! Fee: " + fee + " USDC");
+}
+</script>
+</body>
+</html>
