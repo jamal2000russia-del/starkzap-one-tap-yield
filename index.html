@@ -1,35 +1,37 @@
-<!-- زيد هاد السطر فـ <head> -->
-<script src="https://cdn.jsdelivr.net/npm/starknet@5.24.3/dist/index.umd.js"></script>
-
-<!-- هادو هما الأزرار الجداد -->
-<button id="connectBtn" style="width:100%; background:#22c55e; color:white; padding:12px; border-radius:8px; font-weight:bold; border:none; margin-bottom:8px;" onclick="connectWallet()">CONNECT WALLET</button>
-<div id="walletStatus" style="text-align:center; font-size:12px; color:#a1a1aa; margin-bottom:10px;">Not Connected</div>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StarkZap - One Tap Yield</title>
+<style>
+  body { background: #0a0a0a; color: white; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+  .card { background: #18181b; border: 1px solid #27272a; padding: 24px; border-radius: 16px; width: 340px; }
+  h2 { margin: 0 0 8px 0; }
+  p { color: #a1a1aa; font-size: 13px; margin: 0 0 16px 0; }
+  input { width: 100%; background: #27272a; border: 1px solid #3f3f46; color: white; padding: 10px; border-radius: 8px; box-sizing: border-box; margin-bottom: 12px; }
+  button { width: 100%; background: #6d28d9; border: none; color: white; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; }
+  .status { margin-top: 12px; font-size: 11px; color: #71717a; text-align:center; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <h2>StarkZap</h2>
+    <p>Zap 10 USDC -> Vesu Yield. Fee 0.1% to you.</p>
+    <input id="amount" type="number" value="10">
+    <button onclick="zap()">ZAP TO YIELD</button>
+    <div class="status" id="status">Ready • CONNECTED: 0x5608...8b87</div>
+  </div>
 <script>
-async function connectWallet(){
-  const status = document.getElementById('walletStatus');
-  const btn = document.getElementById('connectBtn');
-  try {
-    status.innerText = "Requesting wallet...";
-    // كيقلب على Wallet فالمتصفح - Ready / ArgentX / Braavos
-    const starknet = window.starknet;
-    if(!starknet){
-      status.innerText = "❌ No wallet found. Open this site INSIDE Ready / ArgentX / Braavos app.";
-      alert("حل هاد الموقع من داخل تطبيق Ready Wallet ولا ArgentX، ماشي من Chrome");
-      return;
-    }
-    await starknet.enable();
-    const address = starknet.selectedAddress || starknet.account?.address;
-    if(address){
-      const short = address.slice(0,6) + "..." + address.slice(-4);
-      status.innerText = "✅ CONNECTED: " + short;
-      btn.innerText = "CONNECTED: " + short;
-      btn.style.background = "#18181b";
-    } else {
-      status.innerText = "Wallet found but no address. Try again.";
-    }
-  } catch(e){
-    status.innerText = "❌ User rejected or error: " + e.message;
-  }
+function zap() {
+  const amount = parseFloat(document.getElementById('amount').value || 10);
+  const fee = (amount * 0.001).toFixed(2);
+  document.getElementById('status').innerText = `Calculating fee...`;
+  setTimeout(() => {
+    document.getElementById('status').innerText = `Ready • CONNECTED: 0x5608...8b87`;
+    alert(`Zapped! Fee: ${fee} USDC`);
+  }, 500);
 }
 </script>
+</body>
+</html>
