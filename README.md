@@ -2,7 +2,7 @@
 
 StarkZap drastically simplifies the Starknet DeFi UX by abstracting complex multi-step interactions into a single-tap transaction. Users can effortlessly route liquidity directly into native yield protocols without managing bridges, multi-token approvals, or manual swaps.
 
-* **Live Application:** [starkzap-one-tap-yield.vercel.app](https://vercel.app)
+* **Live Application:** [https://starkzap-one-tap-yield.vercel.app/?v=999[
 * **Target Ecosystem Tracks:** DeFi / Vesu Track & AVNU Aggregator Track
 * **Developer Context:** Solo Builder | Agadir, Morocco (GitHub: jamal2000russia-del)
 * **Verified Deployer Wallet:** `0x5608...8b87`
