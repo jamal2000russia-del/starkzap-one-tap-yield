@@ -48,7 +48,7 @@
   <div class="addr">Connected: 0x5608...8b87</div>
 
   <label>Amount to Zap (USDC)</label>
-  <input id="amount" type="number" value="10">
+  <input id="amount" type="number" value="10" oninput="update()" onkeyup="update()" onchange="update()">
 
   <div class="row"><span>Protocol Fee (0.1%)</span><b id="fee">0.01 USDC</b></div>
   <div class="row"><span>You will deposit to Vesu</span><b id="dep">9.99 USDC</b></div>
@@ -66,7 +66,12 @@
 
 <script>
 function update(){
-  var input = document.getElementById('amount');
-  var a = parseFloat(input.value);
+  var a = parseFloat(document.getElementById('amount').value);
   if(isNaN(a)) a = 0;
   var fee = a * 0.001;
+  var dep = a - fee;
+  var y = dep * 0.0842;
+  document.getElementById('fee').innerText = fee.toFixed(2) + ' USDC';
+  document.getElementById('dep').innerText = dep.toFixed(2) + ' USDC';
+  document.getElementById('yield').innerText = y.toFixed(2) + ' USDC / year';
+  document.getElementById('earnedTop').innerText = fee.toFixed(2
