@@ -1,75 +1,62 @@
-# ⚡ StarkZap - One Tap Yield
+# ⚡ StarkZap — Native One-Tap Yield Aggregator on Starknet
 
-**Zap USDC → Earn Yield in 1 Tap on Starknet**
+StarkZap drastically simplifies the Starknet DeFi UX by abstracting complex multi-step interactions into a single-tap transaction. Users can effortlessly route liquidity directly into native yield protocols without managing bridges, multi-token approvals, or manual swaps.
 
-Live Demo: https://starkzap-one-tap-yield.vercel.app
-GitHub: https://github.com/jamal2000russia-del/starkzap-one-tap-yield
-
-Built by: jamal2000russia-del (Agadir, MA)
-Owner Wallet: 0x5608...8b87
+* **Live Application:** [starkzap-one-tap-yield.vercel.app](https://vercel.app)
+* **Target Ecosystem Tracks:** DeFi / Vesu Track & AVNU Aggregator Track
+* **Developer Context:** Solo Builder | Agadir, Morocco (GitHub: jamal2000russia-del)
+* **Verified Deployer Wallet:** `0x5608...8b87`
 
 ---
 
-## What is StarkZap?
+## 💻 The Problem & The Core Solution
 
-StarkZap is a one-tap yield tool on Starknet.
+### The Friction
+Earning yield on Starknet traditionally presents heavy onboarding friction for users, requiring a minimum of 5 operational steps: bridging assets, interacting with a DEX aggregator, executing token approvals, navigating the native protocol interface, and finally depositing liquidity.
 
-User enters USDC, clicks ZAP, and it swaps via Avnu and deposits into Vesu to earn yield.
+### The StarkZap UX
+StarkZap leverages Starknet’s native **Account Abstraction** capability to compress this funnel into **1 Click**. The architecture seamlessly bundles asset routing, smart routing via AVNU, and atomic deployment into Vesu's liquidity pools in a single execution multicall.
 
-No complicated steps. No 5 clicks. Just 1 tap.
+---
 
-## How it works
+## 📊 Monetization & Fee Architecture
 
-1. **Connect** - Connect your Starknet wallet (Ready / Argent / Braavos)
-2. **Zap** - Enter amount, e.g. 10 USDC or 100 USDC
-3. **Earn** - Your USDC is deposited into Vesu and starts earning yield
+StarkZap implements a sustainable, low-friction monetization model hardcoded at the smart contract transaction layer:
 
-## Fee Model
+* **Protocol Fee:** Fixed at **0.1%** per inbound Zap transaction.
+* **Fee Execution Example (100 USDC):**
+  * Total Input: `100.00 USDC`
+  * Protocol Fee (0.1%): `0.10 USDC` (Routed to builder contract/wallet)
+  * Net Pool Injection: `99.90 USDC` (Deposited automatically into Vesu)
 
-- Fee: **0.1%** to builder
-- Example:
-    - Zap 10 USDC → Fee 0.01 USDC → Deposit 9.99 USDC
-    - Zap 100 USDC → Fee 0.10 USDC → Deposit 99.90 USDC
+---
 
-- Vesu APY: ~8.42%
-- Yearly Yield on 100 USDC: ~8.41 USDC
+## 🛠️ Tech Stack & Integrations
 
-## Features
+* **Frontend Environment:** Clean HTML5, CSS3, and modern asynchronous JavaScript (ES6+).
+* **Web3 Middleware:** `starknet.js` for encoding contract calls, handling account abstraction, and signing multicalls.
+* **Integrations:** 
+  * **AVNU:** Utilized for hyper-efficient asset swap logic and optimized liquidity paths.
+  * **Vesu:** Direct contract interactions for secondary lending-market yield capture (Current APY benchmark: ~8.42%).
+* **Deployment Platform:** Vercel (Edge network configurations for rapid global loading).
 
-- ✅ Wallet Connect (Ready Wallet tested)
-- ✅ Real-time Fee Calculator
-- ✅ Live "You Earned" Counter
-- ✅ Recent Zaps History
-- ✅ Professional UI - Mobile First
-- ✅ Built for Starknet
+---
 
-## Tech Stack
+## 🗺️ Roadmap & Proposed Grant Milestones
 
-- Frontend: HTML / CSS / JavaScript
-- Deployment: Vercel
-- Network: Starknet Mainnet / Sepolia
-- Integrations: Avnu (Swap) + Vesu (Yield)
+If selected for the Starknet Foundation Seed Grant, funding will directly accelerate the delivery of the following production milestones:
 
-## Tracks
+### Milestone 1: Multi-Asset Inbound Zapping (Q1 2027)
+* Integrate live multi-asset swaps via AVNU contracts so users can input **ETH** or **STRK** and auto-convert to Vesu yield positions in a single tap.
 
-- DeFi / Vesu Track
-- Avnu Track
+### Milestone 2: Atomic "Un-Zap" Withdrawal Portal (Q2 2027)
+* Build the corresponding reverse pipeline allowing users to exit Vesu pools back to native gas or stablecoins in one transaction, adding a parallel 0.1% exit monetization model.
 
-## Demo Video
+### Milestone 3: Smart Contract Security Audit & Verification (Q2 2027)
+* Retain a reputable Starknet ecosystem security firm to audit the underlying Cairo contract logic and verify code integrity on Starkscan/Voyager.
 
-Video shows:
-- Wallet Connected: 0x5608...8b87
-- Zap 10 → Fee 0.01
-- Zap 100 → Fee 0.10 → Deposit 99.90
-- Earned Counter: 0.02 → 0.12
+---
 
-## Proof of Ownership
-
-This repo is owned by jamal2000russia-del.
-Live deployment is owned by the same account.
-Owner Wallet: 0x5608...8b87 is the wallet used in the demo video.
-
-## Contact
-
-GitHub: jamal2000russia-del
-Demo: https://starkzap-one-tap-yield.vercel.app
+## 🔑 Proof of Ownership
+This repository, its production frontend code, and its automated deployment pipelines are strictly maintained and owned by `jamal2000russia-del`. The administrative wallet address utilized across demo iterations and transaction proofs is safely bound to:
+`0x5608b8705f111be125a812e95a947477b7381ad79471927774d610015698b87`
